@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
-// import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -19,43 +18,43 @@ import javafx.stage.Stage;
  */
 public class DummyModal {
 
-  
-  public static void show(String windowTitle, String name) {
-    Stage modal = new Stage();
 
-    modal.initModality(Modality.APPLICATION_MODAL);
-    modal.setTitle(windowTitle);
+    public static void show(String windowTitle, String name) {
+        Stage modal = new Stage();
 
-    GridPane grid = new GridPane();
-    grid.setId("pane");
-    grid.setHgap(16);
-    grid.setVgap(12);
-    grid.setAlignment(Pos.CENTER);
+        modal.initModality(Modality.APPLICATION_MODAL);
+        modal.setTitle(windowTitle);
 
-    try{
-      FileInputStream input = new FileInputStream(new File("../resources/Monkey.png"));
-      Image image = new Image(input);
-      ImageView imageView = new ImageView(image);
-      grid.add(imageView, 0, 2);
-    } catch (Exception e) {
-      System.out.println(e);
+        GridPane grid = new GridPane();
+        grid.setId("pane");
+        grid.setHgap(16);
+        grid.setVgap(12);
+        grid.setAlignment(Pos.CENTER);
+
+        try{
+            FileInputStream input = new FileInputStream(new File("Monkey.png"));
+            Image image = new Image(input);
+            ImageView imageView = new ImageView(image);
+            grid.add(imageView, 0, 2);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        Label nameLabel = new Label("My name is " + name);
+        nameLabel.setStyle("-fx-text-fill: #d32f2f");
+
+        Label dummyLabel = new Label("I was a dummy!!!");
+
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> modal.close());
+
+        grid.add(nameLabel, 0, 0);
+        grid.add(dummyLabel, 0, 1);
+        grid.add(backButton, 0, 3);
+
+        // scene 1
+        Scene scene = new Scene(grid, 400, 240);
+        modal.setScene(scene);
+        modal.showAndWait();
     }
-    
-    Label nameLabel = new Label("My name is " + name);
-    nameLabel.setStyle("-fx-text-fill: #d32f2f");
-
-    Label dummyLabel = new Label("I was a dummy!!!");
-    
-    Button backButton = new Button("Back");
-    backButton.setOnAction(e -> modal.close());
-
-    grid.add(nameLabel, 0, 0);
-    grid.add(dummyLabel, 0, 1);
-    grid.add(backButton, 0, 3);
-
-    // scene 1
-    Scene scene = new Scene(grid, 400, 240);
-    modal.setScene(scene);
-    modal.showAndWait();
-  }
 }
